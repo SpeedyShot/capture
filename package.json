@@ -1,6 +1,6 @@
 {
   "name": "@speedyshot/capture",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A JavaScript libary to easily use SpeedyShot's capture service",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,6 +19,10 @@
   "files": [
     "lib/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpeedyShot/capture.git"
+  },
   "keywords": [
     "speedyshot",
     "screenshots",
