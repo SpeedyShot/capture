@@ -1,9 +1,9 @@
 {
   "name": "@speedyshot/capture",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A JavaScript libary to easily use SpeedyShot's capture service",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "format": "npx prettier --write \"src/**/*.ts\"",
     "lint": "npx tslint -p tsconfig.json",
