@@ -1,6 +1,6 @@
 {
   "name": "@speedyshot/capture",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A JavaScript libary to easily use SpeedyShot's capture service",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,7 +17,7 @@
     "version": "npm run format && git add -A src"
   },
   "files": [
-    "lib/**/*"
+    "build/**/*"
   ],
   "repository": {
     "type": "git",
