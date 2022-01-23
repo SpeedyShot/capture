@@ -1,6 +1,6 @@
 {
   "name": "@speedyshot/capture",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A JavaScript libary to easily use SpeedyShot's capture service",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

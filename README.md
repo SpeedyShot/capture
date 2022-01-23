@@ -19,7 +19,7 @@ Furthermore, it also automatically throttles your requests to avoid hitting the 
 ## Usage
 
 ### Single requests
-```
+```javascript
 import { SpeedyShotCapture } from '@speedyshot/capture';
 
 // Replace your api key in the constructor
@@ -35,7 +35,7 @@ const result = await speedyShotCapture.captureSingle({
 ```
 
 ### Multiple requests
-```
+```javascript
 import { SpeedyShotCapture } from '@speedyshot/capture';
 
 // Replace your api key in the constructor
@@ -54,7 +54,7 @@ const results = await speedyShotCapture.captureMultiple([parameters, parameters]
 ```
 
 ### With custom options
-```
+```javascript
 import { SpeedyShotCapture } from '@speedyshot/capture';
 
 // Replace your api key in the constructor
