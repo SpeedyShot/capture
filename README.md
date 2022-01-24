@@ -62,11 +62,11 @@ import { SpeedyShotCapture } from '@speedyshot/capture';
 const customOptions = {
     // Max. concurrent requests.
     // Default is 50, min is 1, max is 100
-    maxConcurrency: 75;
+    maxConcurrency: 75,
      
     // Include the raw axios response?
     // The result object will contain a 'raw' field with the AxiosResponse object
-    includeRawResponse: true;
+    includeRawResponse: true
 };
 const speedyShotCapture = new SpeedyShotCapture('YOUR-API-KEY', customOptions);
 
