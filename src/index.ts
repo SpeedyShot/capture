@@ -2,24 +2,68 @@ import pLimit, { Limit } from 'p-limit';
 import axios, { AxiosResponse } from 'axios';
 
 export interface CaptureParameters {
-    url: string;
     output: 'jpeg' | 'webp' | 'png' | 'pdf' | 'text' | 'html';
-    quality?: number;
+    url?: string;
+    htmlContent?: string;
+    encoding?: 'inline';
     fullPage?: boolean;
-    clip?: CaptureClipParameter;
-    omitBackground?: boolean;
-    captureBeyondViewport?: boolean;
-    scale?: number;
-    printBackground?: boolean;
+    clip?: CaptureParameterClip;
     width?: number;
     height?: number;
+    scale?: number;
+    omitBackground?: boolean;
+    captureBeyondViewport?: boolean;
     isMobile?: boolean;
     hasTouch?: boolean;
     isLandscape?: boolean;
+    printBackground?: boolean;
     pdfFormat?: 'a0' | 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6' | 'Letter' | 'Legal' | 'Tabloid' | 'Ledger';
+    quality?: number;
+    authentication?: CaptureParameterAuthentication;
+    cookies?: CaptureParameterCookie[];
+    headers?: CaptureParameterHeader[];
+    geolocation?: CaptureParameterGeolocation;
+    userAgent?: string;
+    waitForItems?: CaptureParameterWaitForItem[];
+    disableJavascript?: boolean;
+    enableOfflineMode?: boolean;
+    loadUntil?: 'networkidle2' | 'networkidle0' | 'load' | 'domcontentloaded';
+    proxy?: string;
+    consoleOutput?: boolean;
+    extraScripts?: CaptureParameterExtraScript[];
+    extraStyles?: CaptureParameterExtraStyle[];
 }
 
-export interface CaptureClipParameter {
+export interface CaptureParameterAuthentication {
+    username: string;
+    password: string;
+}
+export interface CaptureParameterCookie {
+    name: string;
+    value: string;
+}
+export interface CaptureParameterGeolocation {
+    latitude: number;
+    longitude: number;
+}
+export interface CaptureParameterHeader {
+    key: string;
+    value: string;
+}
+export interface CaptureParameterWaitForItem {
+    type: 'selector' | 'timeout';
+    value: string | number;
+}
+export interface CaptureParameterExtraScript {
+    url?: string;
+    content?: string;
+}
+export interface CaptureParameterExtraStyle {
+    url?: string;
+    content?: string;
+}
+
+export interface CaptureParameterClip {
     x: number;
     y: number;
     width: number;
