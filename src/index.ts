@@ -24,7 +24,7 @@ export interface CaptureParameters {
     headers?: any;
     geolocation?: CaptureParameterGeolocation;
     userAgent?: string;
-    waitForItems?: CaptureParameterWaitForItem[];
+    waitForItems?: (string | number)[];
     disableJavascript?: boolean;
     enableOfflineMode?: boolean;
     loadUntil?: 'networkidle2' | 'networkidle0' | 'load' | 'domcontentloaded';
@@ -52,10 +52,6 @@ export interface CaptureParameterCookie {
 export interface CaptureParameterGeolocation {
     latitude: number;
     longitude: number;
-}
-export interface CaptureParameterWaitForItem {
-    type: 'selector' | 'timeout';
-    value: string | number;
 }
 export interface CaptureParameterExtraScript {
     url?: string;
