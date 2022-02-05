@@ -21,7 +21,7 @@ export interface CaptureParameters {
     quality?: number;
     authentication?: CaptureParameterAuthentication;
     cookies?: CaptureParameterCookie[];
-    headers?: CaptureParameterHeader[];
+    headers?: any;
     geolocation?: CaptureParameterGeolocation;
     userAgent?: string;
     waitForItems?: CaptureParameterWaitForItem[];
@@ -41,14 +41,17 @@ export interface CaptureParameterAuthentication {
 export interface CaptureParameterCookie {
     name: string;
     value: string;
+    url?: string;
+    domain?: string;
+    path?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    secure?: boolean;
+    sameSite?: 'Strict' | 'Lax';
 }
 export interface CaptureParameterGeolocation {
     latitude: number;
     longitude: number;
-}
-export interface CaptureParameterHeader {
-    key: string;
-    value: string;
 }
 export interface CaptureParameterWaitForItem {
     type: 'selector' | 'timeout';
