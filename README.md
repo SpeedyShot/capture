@@ -1,5 +1,4 @@
 ![@speedyshot/capture on NPM](https://img.shields.io/npm/v/@speedyshot/capture)
-[![codecov](https://codecov.io/gh/SpeedyShot/capture/branch/master/graph/badge.svg?token=0ILZIMVD2L)](https://codecov.io/gh/SpeedyShot/capture)
 
 # @SpeedyShot/Capture
 

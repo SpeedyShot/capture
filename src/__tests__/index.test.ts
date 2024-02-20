@@ -16,7 +16,9 @@ const successAxiosResponse: AxiosResponse = {
         'x-ratelimit-limit': '100',
         'x-ratelimit-remaining': '99',
     },
-    config: {},
+    // @ts-ignore
+    config: {
+    },
 };
 const successOutput: CaptureOutput = {
     result: {
