@@ -77,6 +77,11 @@ const result = await speedyShotCapture.captureSingle({
 });
 ```
 
+# Changelog
+## 1.0.0
+- Methods slightly refactored for readability with async instead of plain promises.
+- CaptureBulk method added
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 

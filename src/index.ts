@@ -1,8 +1,9 @@
 import pLimit, { Limit } from 'p-limit';
 import axios, { AxiosResponse } from 'axios';
 
+type CaptureOutputType = 'jpeg' | 'webp' | 'png' | 'pdf' | 'text' | 'html';
 export interface CaptureParameters {
-    output: 'jpeg' | 'webp' | 'png' | 'pdf' | 'text' | 'html';
+    output: CaptureOutputType;
     url?: string;
     htmlContent?: string;
     encoding?: 'inline';
@@ -32,6 +33,10 @@ export interface CaptureParameters {
     consoleOutput?: boolean;
     extraScripts?: CaptureParameterExtraScript[];
     extraStyles?: CaptureParameterExtraStyle[];
+    storageAuthKey?: string;
+    storageAuthSecretKey?: string;
+    storageBucket?: string;
+    storageFilePath?: string; // Mandatory for bulk requests
 }
 
 export interface CaptureParameterAuthentication {
@@ -92,12 +97,23 @@ export interface CaptureOutputMetaData {
     rateLimitRemaining: number;
 }
 
+// Storage settings are mandatory on bulk requests
+// Otherwise, there is nowhere to store the results
+type CaptureParametersBulk = Omit<CaptureParameters, 'output'>;
+export interface CaptureBulkGlobalConfig extends CaptureParametersBulk {
+    output?: CaptureOutputType;
+    storageAuthKey: string;
+    storageAuthSecretKey: string;
+    storageBucket: string;
+}
+
 export class SpeedyShotCapture {
     _apiKey: string;
     _maxConcurrency: number;
     _pLimit: Limit;
     _serviceBaseUrl: string = 'https://service.speedyshot.com';
     _serviceEndpoint: string = '/api/snap';
+    _serviceBulkEndpoint: string = '/api/bulk';
     _includeRawResponse: boolean = false;
 
     constructor(apiKey: string, options: CaptureOptions = {}) {
@@ -118,24 +134,47 @@ export class SpeedyShotCapture {
         }
     }
 
-    captureSingle(parameters: CaptureParameters): Promise<CaptureOutput> {
-        return this._pLimit(() => {
+    async captureSingle(parameters: CaptureParameters): Promise<CaptureOutput> {
+        const response: AxiosResponse = await this._pLimit(() => {
             return axios.post(this._serviceBaseUrl + this._serviceEndpoint, parameters, {
                 headers: {
                     authorization: this._apiKey,
                 },
             });
-        }).then((response: AxiosResponse) => {
-            return this._transformResponse(response);
         });
+
+        return this._transformResponse(response);
     }
 
-    captureMultiple(parametersList: CaptureParameters[]): Promise<CaptureOutput[]> {
-        const promisesList = parametersList.map((parameters) => {
+    /**
+     * Use this library to send multiple requests to SpeedyShot in parallel
+     * Use of the Bulk API (async) is recommended instead
+     * @param requestsList An array of requests to send to SpeedyShot
+     */
+    captureMultiple(requestsList: CaptureParameters[]): Promise<CaptureOutput[]> {
+        const promisesList = requestsList.map((parameters) => {
             return this.captureSingle(parameters);
         });
 
         return Promise.all(promisesList);
+    }
+
+    /**
+     *
+     * @param globalConfig This configuration is applied to all the requests
+     * @param requestsList An array of requests to send to SpeedyShot
+     */
+    async captureBulk(globalConfig: CaptureBulkGlobalConfig, requestsList: CaptureParameters[]): Promise<CaptureOutput> {
+        const bulkRequestBody = {
+            config: globalConfig,
+            items: requestsList
+        };
+        const response = await axios.post(this._serviceBaseUrl + this._serviceBulkEndpoint, bulkRequestBody, {
+            headers: {
+                authorization: this._apiKey,
+            },
+        });
+        return this._transformResponse(response);
     }
 
     _transformResponse(response: AxiosResponse): CaptureOutput {
