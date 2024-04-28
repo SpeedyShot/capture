@@ -78,6 +78,10 @@ const result = await speedyShotCapture.captureSingle({
 ```
 
 # Changelog
+## 1.1.0
+- Added support for `hideAds`, `hideCookieBanners`, and `useSpeedyProxy` features.
+- Upgraded dependencies
+
 ## 1.0.0
 - Methods slightly refactored for readability with async instead of plain promises.
 - CaptureBulk method added
