@@ -78,11 +78,14 @@ const result = await speedyShotCapture.captureSingle({
 ```
 
 # Changelog
-## 1.1.0
+## 1.2.0 - 01/05/2024
+- Added support for `storageRegion`, `storageEndpoint` parameters so S3-Compatible storage can be used, for example Wasabi.
+
+## 1.1.0 - 28/04/2024
 - Added support for `hideAds`, `hideCookieBanners`, and `useSpeedyProxy` features.
 - Upgraded dependencies
 
-## 1.0.0
+## 1.0.0 - 21/02/2024
 - Methods slightly refactored for readability with async instead of plain promises.
 - CaptureBulk method added
 

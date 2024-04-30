@@ -36,6 +36,8 @@ export interface CaptureParameters {
     storageAuthKey?: string;
     storageAuthSecretKey?: string;
     storageBucket?: string;
+    storageRegion?: string;
+    storageEndpoint?: string;
     storageFilePath?: string; // Mandatory for bulk requests
     hideAds?: boolean;
     hideCookieBanners?: boolean;
