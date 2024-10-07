@@ -78,6 +78,9 @@ const result = await speedyShotCapture.captureSingle({
 ```
 
 # Changelog
+## 1.2.1 - 07/10/2024
+- Maintenance update
+
 ## 1.2.0 - 01/05/2024
 - Added support for `storageRegion`, `storageEndpoint` parameters so S3-Compatible storage can be used, for example Wasabi.
 

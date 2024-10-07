@@ -169,10 +169,13 @@ export class SpeedyShotCapture {
      * @param globalConfig This configuration is applied to all the requests
      * @param requestsList An array of requests to send to SpeedyShot
      */
-    async captureBulk(globalConfig: CaptureBulkGlobalConfig, requestsList: CaptureParameters[]): Promise<CaptureOutput> {
+    async captureBulk(
+        globalConfig: CaptureBulkGlobalConfig,
+        requestsList: CaptureParameters[],
+    ): Promise<CaptureOutput> {
         const bulkRequestBody = {
             config: globalConfig,
-            items: requestsList
+            items: requestsList,
         };
         const response = await axios.post(this._serviceBaseUrl + this._serviceBulkEndpoint, bulkRequestBody, {
             headers: {

@@ -18,8 +18,7 @@ const successAxiosResponse: AxiosResponse = {
         'x-ratelimit-remaining': '99',
     },
     // @ts-ignore
-    config: {
-    },
+    config: {},
 };
 const successOutput: CaptureOutput = {
     result: {
@@ -41,10 +40,10 @@ const bulkSuccessAxiosResponse: AxiosResponse = {
     status: 200,
     statusText: 'success',
     data: {
-        'information': 'Bulk request sent for processing.',
-        'warning': 'Bulk requests cannot be stopped once sent for processing.',
-        'itemsSentForProcessing': 2,
-        'creditsRemainingAfterProcessing': 1875,
+        information: 'Bulk request sent for processing.',
+        warning: 'Bulk requests cannot be stopped once sent for processing.',
+        itemsSentForProcessing: 2,
+        creditsRemainingAfterProcessing: 1875,
     },
     headers: {
         'x-credits-remaining-before': '100',
@@ -56,15 +55,14 @@ const bulkSuccessAxiosResponse: AxiosResponse = {
         'x-ratelimit-remaining': '99',
     },
     // @ts-ignore
-    config: {
-    },
+    config: {},
 };
 const bulkSuccessOutput: CaptureOutput = {
     result: {
-        'information': 'Bulk request sent for processing.',
-        'warning': 'Bulk requests cannot be stopped once sent for processing.',
-        'itemsSentForProcessing': 2,
-        'creditsRemainingAfterProcessing': 1875,
+        information: 'Bulk request sent for processing.',
+        warning: 'Bulk requests cannot be stopped once sent for processing.',
+        itemsSentForProcessing: 2,
+        creditsRemainingAfterProcessing: 1875,
     },
     metaData: {
         contentLength: 1200,
@@ -186,7 +184,7 @@ describe('Given Speedyshot Capture', () => {
                         url: 'dummy',
                         output: 'jpeg',
                     },
-                ])
+                ]),
             ).rejects.toThrow(error);
         });
     });
@@ -199,22 +197,25 @@ describe('Given Speedyshot Capture', () => {
             });
             expect.assertions(1);
             expect(
-              captureService.captureBulk({
-                  storageAuthKey: 'a',
-                  storageAuthSecretKey: 'a',
-                  storageBucket: 'a'
-              }, [
-                  {
-                      url: 'dummy',
-                      output: 'jpeg',
-                      storageFilePath: '/myFolder/myFile.jpeg'
-                  },
-                  {
-                      url: 'dummy-2',
-                      output: 'jpeg',
-                      storageFilePath: '/myFolder/myFile-2.jpeg'
-                  },
-              ])
+                captureService.captureBulk(
+                    {
+                        storageAuthKey: 'a',
+                        storageAuthSecretKey: 'a',
+                        storageBucket: 'a',
+                    },
+                    [
+                        {
+                            url: 'dummy',
+                            output: 'jpeg',
+                            storageFilePath: '/myFolder/myFile.jpeg',
+                        },
+                        {
+                            url: 'dummy-2',
+                            output: 'jpeg',
+                            storageFilePath: '/myFolder/myFile-2.jpeg',
+                        },
+                    ],
+                ),
             ).rejects.toThrow(error);
         });
     });
@@ -222,22 +223,25 @@ describe('Given Speedyshot Capture', () => {
     describe('When submitting a bulk request and it succeeds', () => {
         test('Then we should get a success message with information', async () => {
             axiosPostMock.mockResolvedValueOnce(bulkSuccessAxiosResponse);
-            const result = await captureService.captureBulk({
-                storageAuthKey: 'a',
-                storageAuthSecretKey: 'a',
-                storageBucket: 'a'
-            }, [
+            const result = await captureService.captureBulk(
                 {
-                    url: 'dummy',
-                    output: 'jpeg',
-                    storageFilePath: '/myFolder/myFile.jpeg'
+                    storageAuthKey: 'a',
+                    storageAuthSecretKey: 'a',
+                    storageBucket: 'a',
                 },
-                {
-                    url: 'dummy-2',
-                    output: 'jpeg',
-                    storageFilePath: '/myFolder/myFile-2.jpeg'
-                },
-            ]);
+                [
+                    {
+                        url: 'dummy',
+                        output: 'jpeg',
+                        storageFilePath: '/myFolder/myFile.jpeg',
+                    },
+                    {
+                        url: 'dummy-2',
+                        output: 'jpeg',
+                        storageFilePath: '/myFolder/myFile-2.jpeg',
+                    },
+                ],
+            );
             expect(captureService._maxConcurrency).toBe(50);
             expect(result).toEqual(bulkSuccessOutput);
         });
