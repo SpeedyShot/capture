@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "p-limit": "^2.3.0"
+    "p-limit": "^6.1.0"
   },
   "overrides": {
     "braces": "3.0.3"
